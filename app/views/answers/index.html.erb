@@ -1,3 +1,11 @@
-<% @answers.each do |a| %>
-  <%= a.answer_text %>
-<% end %>
+<h1> <%= @question.title %> </h1>
+
+<h3><%=@question.description %> </h3>
+
+<ul id="question_description">
+  <% @answers.each do |a| %>
+    <li><%= a.answer_text %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Answer this question", new_question_answer_path(@question), id: "new_answer", remote: true %>
