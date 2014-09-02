@@ -1,4 +1,8 @@
-<% @questions.each do |q| %>
-  <%= q.title %>
-  <%= q.description %>
-<% end %>
+<ul>
+  <% @questions.each do |q| %>
+    <li>
+    <p><%= q.title %></p>
+    <p><%= q.description %></p>
+    </li>
+  <% end %>
+</ul>
