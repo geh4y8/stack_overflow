@@ -13,10 +13,14 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.user_id = current_user.id
     if @answer.save
-      redirect_to root_url, notice: "A new answer added!"
+      respond_to do |format|
+        format.html { redirect_to root_url}
+        format.js
+      end
     else
       render "new"
     end
+
   end
 
   private

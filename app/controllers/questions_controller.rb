@@ -1,9 +1,12 @@
 class QuestionsController < ApplicationController
-   before_filter :authorize, only: [:edit, :update]
-   def index
+
+  before_filter :authorize, only: [:edit, :update]
+
+  def index
     @questions = Question.all
-   end
-   def new
+  end
+
+  def new
     @question = Question.new
   end
 
@@ -26,6 +29,7 @@ class QuestionsController < ApplicationController
 
   def update
   end
+
 private
   def question_params
      params.require(:question).permit(:title, :description, :user_id)
