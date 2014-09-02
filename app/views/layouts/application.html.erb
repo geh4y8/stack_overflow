@@ -5,18 +5,36 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <nav id="main-nav">
+            <ul class="nav navbar-nav pull-left">
+              <%= link_to "stack overflow", '#', id: "logo" %>
+              <li><%= link_to "Home", '#' %></li>
+              <% if current_user %>
+                <li><%= link_to "Ask question", new_question_path %></li>
+              <% end %>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+               <% if current_user %>
+                <li><%= link_to current_user.user_name %></li>
+                <li><%= link_to "Log Out", logout_path %></li>
+              <% else %>
+                <li><%= link_to "Sign Up", signup_path %></li>
+                <li><%= link_to "Log In", login_path %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 </head>
 <body>
 
+<%= flash[:notice] %>
+<%= flash[:alert] %>
 <%= yield %>
-
-<% if current_user %>
-  Logged in as <%= current_user.user_name %>.
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <%= link_to "Sign Up", signup_path %> or
-  <%= link_to "Log In", login_path %>
-<% end %>
 
 </body>
 </html>
