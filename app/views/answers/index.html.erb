@@ -5,7 +5,6 @@
 <ul id="question_description">
   <% @answers = Answer.order(:bestanswer).reverse %>
   <% @answers.each do |a| %>
-
      <%= render 'answers/answer', answer: a %>
   <% end %>
 </ul>
