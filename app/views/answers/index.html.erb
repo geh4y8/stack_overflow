@@ -4,11 +4,7 @@
 
 <ul id="question_description">
   <% @answers.each do |a| %>
-    <% if a.bestanswer == true %>
      <%= render 'answers/answer', answer: a %>
-     <% else %>
-     <%= render 'answers/answer', answer: a %>
-     <% end %>
   <% end %>
 </ul>
 

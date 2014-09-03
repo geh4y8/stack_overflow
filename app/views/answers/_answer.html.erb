@@ -1,5 +1,15 @@
-<%= form_for [@question, answer] do |f| %>
-  <%= f.label :answer_text, answer.answer_text %></li>
+<% if answer.bestanswer == true %>
+<%= form_for [@question, answer], :html => {:class => 'selected' } do |f| %>
+  <li>
+  <%= f.label :answer_text, answer.answer_text %>
   <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
-  <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %>
+  <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %></li>
+<% end %>
+<% else %>
+<%= form_for [@question, answer] do |f| %>
+  <li>
+  <%= f.label :answer_text, answer.answer_text %>
+  <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+  <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %></li>
+<% end%>
 <% end %>
