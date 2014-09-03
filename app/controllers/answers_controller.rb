@@ -23,6 +23,20 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit
+    @answer = Answer.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.find(params[:id])
+    @question.answers.each do |a|
+      a.update(:bestanswer => false)
+    end
+    if @answer.update(:bestanswer => true)
+    end
+  end
+
   def destroy
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
@@ -35,6 +49,6 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-     params.require(:answer).permit(:answer_text, :question_id, :user_id)
+     params.require(:answer).permit(:answer_text, :question_id, :user_id, :bestanswer)
   end
 end
