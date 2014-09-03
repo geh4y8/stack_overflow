@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
   belongs_to :user
   belongs_to :question
-  has_many :bestanswers
+  scope :best_answer, ->{ where(bestanswer: true)}
 end
