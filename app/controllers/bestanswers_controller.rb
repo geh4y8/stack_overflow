@@ -10,9 +10,8 @@ class BestanswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.find(params[:id])
-    @bestanswer = Bestanswer.new(bestanswer_params)
-    @bestanswer.user_id = current_user.id
+    @answer = @question.answers.find(params[:answer_id])
+    @bestanswer = Bestanswer.new
     @bestanswer.question_id = @question.id
     @bestanswer.answer_id = @answer.id
     if @bestanswer.save
@@ -20,11 +19,5 @@ class BestanswersController < ApplicationController
     else
       render "new"
     end
-  end
-
-
-private
-  def bestanswer_params
-     params.require(:bestanswer).permit(:user_id, :bestanswer_id)
   end
 end

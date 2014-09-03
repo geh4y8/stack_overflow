@@ -1,3 +1,3 @@
-class BestAnswer < ActiveRecord::Base
-
+class Bestanswer < ActiveRecord::Base
+  belongs_to :answer
 end

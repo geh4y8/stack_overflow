@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :questions do
-    resources :answers
-    resources :bestanswers
+    resources :answers do
+      resources :bestanswers
+    end
   end
 
 end

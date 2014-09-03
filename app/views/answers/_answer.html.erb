@@ -1,5 +1,5 @@
 <%= form_for [@question, answer] do |f| %>
   <li><%= f.label :answer_text, answer.answer_text %></li>
-  <%= link_to "(remove)", question_answer_path(@question, @answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
-  <%= link_to "best answer", question_bestanswers_path(@question,@answer, @bestanswer), method: :post, remote: true %>
+  <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+  <%= link_to "best answer", question_answer_bestanswers_path(@question, answer, @bestanswer), class: "bestanswerchoice", method: :post, remote: true %>
 <% end %>
