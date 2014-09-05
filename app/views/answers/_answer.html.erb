@@ -1,17 +1,35 @@
 <% if answer.bestanswer == true %>
-<%= form_for [@question, answer], :html => {:class => 'selected' } do |f| %>
-  <li>
-  <%= f.label :answer_text, answer.answer_text %>
-  <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
-  <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %>
-  <%= link_to "^^^^", votes_path(answer: answer.id), method: :post, remote: true %></li>
-<% end %>
+  <%= form_for [@question, answer], :html => {:class => 'selected' } do |f| %>
+    <li>
+      <%= f.label :answer_text, answer.answer_text %>
+      <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+      <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %>
+      <% @votes.each do |v| %>
+        <% if v.user_id == current_user.id && answer.id == v.answer_id%>
+          <% @user_voted = true %>
+        <%end %>
+      <% end %>
+      <% if @user_voted != true %>
+         <%= link_to "^^^^", votes_path(answer: answer.id),class: "voteup", method: :post, remote: true %>
+      <%end %>
+      <%= Vote.where(answer_id: answer.id).count %>
+    </li>
+  <% end %>
 <% else %>
-<%= form_for [@question, answer] do |f| %>
-  <li>
-  <%= f.label :answer_text, answer.answer_text %>
-  <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
-  <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %>
-  <%= link_to "^^^^", votes_path(answer: answer.id), method: :post, remote: :true %></li>
-<% end%>
+  <%= form_for [@question, answer] do |f| %>
+    <li>
+      <%= f.label :answer_text, answer.answer_text %>
+      <%= link_to "(remove)", question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+      <%= link_to "best answer", question_answer_path(@question, answer), class: "bestanswerchoice", method: :patch, remote: true %>
+       <% @votes.each do |v| %>
+        <% if v.user_id == current_user.id && answer.id == v.answer_id%>
+          <% @user_voted = true %>
+        <%end %>
+      <% end %>
+      <% if @user_voted != true %>
+        <%= link_to "^^^^", votes_path(answer: answer.id),class: "voteup", method: :post, remote: :true %>
+      <%end %>
+      <%= Vote.where(answer_id: answer.id).count %>
+    </li>
+  <% end%>
 <% end %>

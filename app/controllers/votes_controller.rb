@@ -14,10 +14,7 @@ class VotesController < ApplicationController
     @vote = Vote.new(answer_id: params[:answer])
     @vote.user_id = current_user.id
     if @vote.save
-      respond_to do |format|
-        format.html { redirect_to root_url}
-        format.js
-      end
+      redirect_to root_url, notice: "A new vote added!"
     else
       render "new"
     end

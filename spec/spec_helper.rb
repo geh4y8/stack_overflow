@@ -75,5 +75,5 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
- require 'capybara/rails'
+require 'capybara/rails'
 end

@@ -1,0 +1,8 @@
+<% @answers.each do |a| %>
+  <% @votes.each do |v| %>
+    <% if v.user_id == current_user.id && a.id == v.answer_id%>
+      alert("it works!")
+      $(".voteup").remove();
+    <% end %>
+  <% end %>
+<% end %>
